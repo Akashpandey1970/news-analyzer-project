@@ -179,7 +179,7 @@ def analyze_topic():
     """API endpoint to fetch and analyze news for a given keyword."""
     keyword = request.args.get('keyword', 'default topic')
     
-    api_key = "498db2d3b81c40c8a4258099bcf8e76f"
+    api_key = "Enter Your API Here"
     lang_code = 'hi' if current_user.language == 'Hindi' else 'en'
     api_url = f"https://newsapi.org/v2/everything?apiKey={api_key}&q={keyword}&language={lang_code}"
 
@@ -206,7 +206,7 @@ def analyze_topic():
 def latest_news():
     """API endpoint to fetch and analyze the latest published news."""
     
-    api_key = "498db2d3b81c40c8a4258099bcf8e76f"
+    api_key = "Enter Your API Here"
     api_url = f"https://newsapi.org/v2/everything?apiKey={api_key}&q=news&language=en&sortBy=publishedAt"
 
     try:
@@ -232,3 +232,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
