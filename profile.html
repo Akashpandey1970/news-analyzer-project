@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Your Profile</h2>
+        <a href="{{ url_for('interactive_dashboard') }}" class="text-indigo-600 hover:underline">&larr; Back to Dashboard</a>
+    </div>
+    <form method="POST" action="{{ url_for('profile') }}">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+            <p class="bg-gray-200 text-gray-700 py-2 px-3 rounded">{{ user.email }}</p>
+        </div>
+        <div class="mb-4">
+            <label for="language" class="block text-gray-700 text-sm font-bold mb-2">Preferred Language</label>
+            <select name="language" id="language" class="shadow border rounded w-full py-2 px-3 text-gray-700">
+                <option value="English" {% if user.language == 'English' %}selected{% endif %}>English</option>
+                <option value="Hindi" {% if user.language == 'Hindi' %}selected{% endif %}>Hindi</option>
+            </select>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Areas of Interest</label>
+            <div class="grid grid-cols-2 gap-4">
+                {% set interests = ['Technology', 'Economy', 'Environment', 'Politics', 'Health', 'Sports'] %}
+                {% for interest in interests %}
+                <div>
+                    <input type="checkbox" id="{{ interest }}" name="interests" value="{{ interest }}" {% if interest in user.interests.split(',') %}checked{% endif %} class="form-checkbox h-5 w-5 text-indigo-600">
+                    <label for="{{ interest }}" class="ml-2 text-gray-700">{{ interest }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
